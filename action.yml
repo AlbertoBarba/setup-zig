@@ -13,6 +13,16 @@ inputs:
     description: 'Cache downloaded compilers for faster action runs. Strongly recommended.'
     required: false
     default: 'true'
+  build-cache:
+    description: 'Cache zig global_cache_dir.'
+    required: false
+    default: 'false'
+  build-cache-key:
+    description: 'Cache key for global_cache_dir.'
+    required: true
+    default: 'zig'
 runs:
   using: 'node20'
   main: 'dist/index.js'
+  post: 'dist/build-cache.js'
+  post-if: success()
